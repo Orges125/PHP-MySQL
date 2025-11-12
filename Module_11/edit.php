@@ -4,15 +4,16 @@ include_once('config.php');
 
 $id = $_GET['id'];
 
-$sql = "select FROM users WHERE id = :id";
+$sql = "SELECT * FROM users WHERE id=:id";
 
-$getPrep = $conn->prepare($sql);
+$prep = $conn->prepare($sql);
 
-$getPrep->bindParam(':id', $id);
+$prep->bindParam(':id', $id);
 
 $prep->execute();
 
 $data = $prep->fetch();
+
 ?>
 
 <!DOCTYPE html>
@@ -21,17 +22,13 @@ $data = $prep->fetch();
     <meta charset="UTF-8">
     <title>Edit</title>
 
-
-
-<style>
-
+    <style>
 
         form>input {
             margin-bottom: 10px;
             font-size: 20px;
             padding: 5px;
         }
-
 
         button {
             background: none;
@@ -52,7 +49,6 @@ $data = $prep->fetch();
     <input type="text" name="surname" value="<?php echo $data['surname']?>"><br>
     <input type="email" name="email" value="<?php echo $data['email']?>"><br>
 
-
         <br><br>
         <button type="submit" name="update">UPDATE</button>
        
@@ -60,3 +56,4 @@ $data = $prep->fetch();
     <a href="dashboard.php">Dashboard</a>
     </body>
 </html>
+
